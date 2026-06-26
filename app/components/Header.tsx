@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, MapPin } from "lucide-react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const pathname = usePathname();
   const isHome = pathname === "/";
 
@@ -49,12 +50,42 @@ export default function Header() {
           <Link href="/stations" className="hover:opacity-60 transition-opacity">
             Stations
           </Link>
+          <Link href="/map" className="hover:opacity-60 transition-opacity flex items-center gap-2">
+            <MapPin size={14} />
+            Map
+          </Link>
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-3">
+          {isLoggedIn ? (
+            <>
+              <Link
+                href="/profile"
+                className="flex items-center gap-2 px-4 py-2 text-xs lg:text-sm uppercase tracking-wider border border-white/80 rounded-full hover:bg-white hover:text-black transition-all duration-300"
+              >
+                <User size={16} />
+                Profile
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="px-4 py-2 text-xs lg:text-sm uppercase tracking-wider hover:opacity-60 transition-opacity"
+              >
+                Sign In
+              </Link>
+              <Link
+                href="/register"
+                className="px-4 lg:px-5 py-2 text-xs lg:text-sm uppercase tracking-wider bg-white text-black rounded-full hover:bg-zinc-200 transition-all duration-300"
+              >
+                Sign Up
+              </Link>
+            </>
+          )}
           <Link
             href="/stations"
-            className="px-5 lg:px-6 py-2 text-xs lg:text-sm uppercase tracking-wider border border-white/80 rounded-full hover:bg-white hover:text-black transition-all duration-300"
+            className="px-4 lg:px-5 py-2 text-xs lg:text-sm uppercase tracking-wider border border-white/80 rounded-full hover:bg-white hover:text-black transition-all duration-300"
           >
             Explore
           </Link>
@@ -90,6 +121,27 @@ export default function Header() {
           <Link href="/stations" onClick={() => setIsOpen(false)} className="py-2 border-b border-zinc-800">
             Stations
           </Link>
+          <Link href="/map" onClick={() => setIsOpen(false)} className="py-2 border-b border-zinc-800 flex items-center gap-2">
+            <MapPin size={16} />
+            Map
+          </Link>
+          
+          {isLoggedIn ? (
+            <Link href="/profile" onClick={() => setIsOpen(false)} className="py-2 border-b border-zinc-800 flex items-center gap-2">
+              <User size={16} />
+              Profile
+            </Link>
+          ) : (
+            <>
+              <Link href="/login" onClick={() => setIsOpen(false)} className="py-2 border-b border-zinc-800">
+                Sign In
+              </Link>
+              <Link href="/register" onClick={() => setIsOpen(false)} className="py-2 border-b border-zinc-800">
+                Sign Up
+              </Link>
+            </>
+          )}
+          
           <Link
             href="/stations"
             onClick={() => setIsOpen(false)}
