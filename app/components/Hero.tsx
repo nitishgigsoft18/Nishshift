@@ -5,15 +5,27 @@ import { ChevronDown } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative h-screen min-h-[600px] w-full overflow-hidden bg-black">
-      <Image
+      {/* <Image
         src="/images/bugatti-bolide_.jpg"
         alt="NISHSHIFT premium electric mobility"
         fill
         priority
         className="object-cover object-center scale-105"
         sizes="100vw"
-      />
-
+      /> */}
+        <video
+          className="absolute top-0 left-0 w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source
+            src="/assets/videos/Bugatti-Chiron-Pur-Sport.mp4"
+            type="video/mp4"
+          />
+          Your browser does not support the video tag.
+        </video>
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 sm:px-6 text-center text-white">
