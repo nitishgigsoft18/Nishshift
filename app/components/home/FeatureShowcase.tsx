@@ -13,14 +13,14 @@ const features = [
     tag: "Intelligence",
     title: "Smart Network",
     description: "Real-time availability, route optimization, and seamless app integration across every station.",
-    image: "/images/bugatti-bolide_.jpg",
+    image: "/assets/images/buggati-chiron.jpg",
     align: "right" as const,
   },
   {
     tag: "Luxury",
     title: "Premium Experience",
     description: "Architectural charging hubs designed with the same obsession for detail as the world's finest automobiles.",
-    image: "/images/bugatti-bolide_.jpg",
+    image: "/assets/images/buggati-Tourbillon1.png",
     align: "left" as const,
   },
 ];
