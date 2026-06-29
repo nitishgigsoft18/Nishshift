@@ -6,7 +6,7 @@ const features = [
     tag: "Performance",
     title: "Ultra-Fast Charging",
     description: "Power up in minutes, not hours. Engineered for drivers who demand more from every journey.",
-    image: "/images/bugatti-bolide_.jpg",
+    image: "/assets/images/Ez-new.jpg",
     align: "left" as const,
   },
   {

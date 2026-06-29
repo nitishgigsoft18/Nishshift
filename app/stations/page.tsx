@@ -5,6 +5,7 @@ import Link from "next/link";
 import { MapPin, Navigation, Search, Filter, ArrowLeft, Star, Clock, Zap } from "lucide-react";
 import { mockStations, getNearbyStations } from "@/lib/data";
 import { ChargingStation, ChargerType } from "@/lib/types";
+import Banner from "../components/banner";
 
 export default function StationsPage() {
   const [stations, setStations] = useState<ChargingStation[]>(mockStations);
@@ -102,12 +103,19 @@ export default function StationsPage() {
 
   return (
     <div className="min-h-screen bg-black pt-16 sm:pt-20 pb-8">
+      {/* <div className="min-h-[400px] flex items-center justify-center station-banner relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <h1 className="text-5xl font-semibold text-white">Stations</h1>
+        </div>
+      </div> */}
+      <Banner title="Stations" backgroundImage="/public/assets/images/Station-banner.jpg" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-8 mt-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-8"
           >
             <ArrowLeft size={20} />
             <span className="text-sm uppercase tracking-wider">Back to Home</span>
