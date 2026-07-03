@@ -109,7 +109,7 @@ export default function StationsPage() {
           <h1 className="text-5xl font-semibold text-white">Stations</h1>
         </div>
       </div> */}
-      <Banner title="Stations" backgroundImage="/public/assets/images/Station-banner.jpg" />
+      <Banner title="Stations" backgroundImage="/assets/images/Station-banner.jpg" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8 mt-10">
