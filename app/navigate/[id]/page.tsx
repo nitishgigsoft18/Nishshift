@@ -10,15 +10,24 @@ import { ChargingStation } from "@/lib/types";
 export default function NavigatePage() {
   const params = useParams();
   const router = useRouter();
-  const station = getStationById(params.id as string) as ChargingStation;
+  const [station, setStation] = useState<ChargingStation | null>(null);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [estimatedTime, setEstimatedTime] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getUserLocation();
-  }, []);
+    const stationId = params.id as string;
+    const foundStation = getStationById(stationId);
+    
+    if (foundStation) {
+      setStation(foundStation);
+      getUserLocation(foundStation);
+    } else {
+      setIsLoading(false);
+    }
+  }, [params.id]);
 
-  const getUserLocation = () => {
+  const getUserLocation = (currentStation: ChargingStation) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -28,16 +37,19 @@ export default function NavigatePage() {
           };
           setUserLocation(location);
           // Estimate time based on distance (simplified)
-          const timeInMinutes = Math.round(station.distance * 3); // Rough estimate: 3 minutes per km
+          const timeInMinutes = Math.round(currentStation.distance * 3); // Rough estimate: 3 minutes per km
           setEstimatedTime(`${timeInMinutes} min`);
+          setIsLoading(false);
         },
         (error) => {
           console.error("Error getting location:", error);
-          setEstimatedTime(`${Math.round(station.distance * 3)} min`);
+          setEstimatedTime(`${Math.round(currentStation.distance * 3)} min`);
+          setIsLoading(false);
         }
       );
     } else {
-      setEstimatedTime(`${Math.round(station.distance * 3)} min`);
+      setEstimatedTime(`${Math.round(currentStation.distance * 3)} min`);
+      setIsLoading(false);
     }
   };
 
@@ -56,6 +68,17 @@ export default function NavigatePage() {
     }
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center px-4">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-zinc-700 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-zinc-400">Loading navigation...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!station) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center px-4">
@@ -73,7 +96,7 @@ export default function NavigatePage() {
     <div className="min-h-screen bg-black pt-16 sm:pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-6">
+        <div className="mb-6 mt-5">
           <Link
             href={`/stations/${station.id}`}
             className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-4"
