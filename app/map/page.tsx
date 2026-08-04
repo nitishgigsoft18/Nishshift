@@ -103,7 +103,7 @@ export default function MapPage() {
       {/* Map Container */}
       <div className="pt-16 sm:pt-20 pb-4 px-4 sm:px-6 lg:px-8">
         {/* Map Visualization */}
-        <div className="relative bg-zinc-900 rounded-2xl overflow-hidden h-[50vh] sm:h-[60vh] mb-4 border border-zinc-800">
+        <div className="relative bg-zinc-900 rounded-2xl overflow-hidden h-[50vh] sm:h-[60vh] mt-4 mb-4 border border-zinc-800">
           {loading ? (
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center">

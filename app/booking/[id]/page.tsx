@@ -103,7 +103,7 @@ export default function BookingPage() {
     <div className="min-h-screen bg-black pt-16 sm:pt-20 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-6 mt-4">
+        <div className="mb-6 mt-5">
           <Link
             href={`/stations/${station.id}`}
             className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-4"
